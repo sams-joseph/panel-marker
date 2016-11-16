@@ -498,6 +498,7 @@ try {
     saveAsTif.saveTIF();
 } catch (e) {
     error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' + e.message.toString() + '. ';
+
     alert('There was an error...');
 }
 

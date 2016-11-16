@@ -16,7 +16,13 @@ let doc = app.activeDocument,
     panelWidth = (fullWidth / numPanels) * res,
     error = '';
     colors = new Colors(),
-    saveAsTif = new SaveFiles(File('G33STORE-1/WIP/' + jobnumber + '/prep_art/' + jobnumber + 'panels.tif'));
+    saveAsTif = new SaveFiles(File('G33STORE-1/WIP/' +
+                                    jobnumber +
+                                    '/prep_art/' +
+                                    jobnumber +
+                                    'panels.tif'
+                                )
+                            );
 
     black = colors.solidColor(0, 0, 0, 100);
     red = colors.solidColor(0, 100, 100, 0);
@@ -42,7 +48,9 @@ try {
     createMarks('Panel Breaks', 100, black, 3, panelWidth);
     saveAsTif.saveTIF();
 } catch(e) {
-    error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' + e.message.toString() + '. ';
+    error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' +
+              e.message.toString() + '. ';
+
     alert('There was an error...');
 }
 
