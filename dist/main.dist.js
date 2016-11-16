@@ -466,6 +466,8 @@ var _Logging2 = _interopRequireDefault(_Logging);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+// ./node_modules/.bin/extendscriptr --script src/main.js --output dist/main.dist.js
+
 var doc = app.activeDocument,
     jobnumber = prompt('Job Number: ', '123456P01');
 panelSelection = new _Selections2['default'](), fullWidth = parseInt(doc.width), fullHeight = parseInt(doc.height), res = doc.resolution, overlapWidth = 2 * res, numPanels = Math.ceil(fullWidth / 51), panelWidth = fullWidth / numPanels * res, error = '';
