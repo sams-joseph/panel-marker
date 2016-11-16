@@ -14,7 +14,6 @@ class Logging {
                         + currentdate.getMinutes() + ':'
                         + currentdate.getSeconds();
 
-          // var filepath = "G33STORE-1/4_Joe/scripts/_logs/cinemark/" + this.jobNumber + ".txt";
           var filepath = `G33STORE-1/4_Joe/scripts/_logs/cinemark/${this.jobNumber}.txt`;
           var write_file = File(filepath);
 
@@ -27,7 +26,6 @@ class Logging {
                 write_file.lineFeed = "Macintosh";
               }
               if (out !== false) {
-                // write_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
                 write_file.writeln(`${this.operator} worked ${this.jobNumber} at ${datetime}\nAny Errors: ${this.error}\n`);
                 write_file.close();
               }
@@ -35,7 +33,6 @@ class Logging {
             var append_file = File(filepath);
               append_file.open('a', undefined, undefined);
               if (append_file !== '') {
-                // append_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
                 append_file.writeln(`${this.operator} worked ${this.jobNumber} at ${datetime}\nAny Errors: ${this.error}\n`);
               append_file.close();
             }
