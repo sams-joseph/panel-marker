@@ -311,7 +311,7 @@ var Colors = function () {
 exports["default"] = Colors;
 
 },{}],2:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -331,12 +331,13 @@ var Logging = function () {
   }
 
   _createClass(Logging, [{
-    key: "logger",
+    key: 'logger',
     value: function logger() {
       var currentdate = new Date();
-      var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+      var datetime = currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear() + ' @ ' + currentdate.getHours() + ':' + currentdate.getMinutes() + ':' + currentdate.getSeconds();
 
-      var filepath = "G33STORE-1/4_Joe/scripts/_logs/cinemark/" + this.jobNumber + ".txt";
+      // var filepath = "G33STORE-1/4_Joe/scripts/_logs/cinemark/" + this.jobNumber + ".txt";
+      var filepath = 'G33STORE-1/4_Joe/scripts/_logs/cinemark/' + this.jobNumber + '.txt';
       var write_file = File(filepath);
 
       if (!write_file.exists) {
@@ -348,6 +349,7 @@ var Logging = function () {
           write_file.lineFeed = "Macintosh";
         }
         if (out !== false) {
+          // write_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
           write_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
           write_file.close();
         }
@@ -355,8 +357,8 @@ var Logging = function () {
         var append_file = File(filepath);
         append_file.open('a', undefined, undefined);
         if (append_file !== '') {
+          // append_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
           append_file.writeln(this.operator + ' worked ' + this.jobNumber + ' at ' + datetime + '\nAny Errors: ' + this.error + '\n');
-
           append_file.close();
         }
       }
@@ -366,7 +368,7 @@ var Logging = function () {
   return Logging;
 }();
 
-exports["default"] = Logging;
+exports['default'] = Logging;
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -470,8 +472,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 var doc = app.activeDocument,
     jobnumber = prompt('Job Number: ', '123456P01');
 materialWidth = 54, panelSelection = new _Selections2['default'](), fullWidth = parseInt(doc.width), fullHeight = parseInt(doc.height), res = doc.resolution, overlap = 2, overlapWidth = overlap * res, availableMaterial = materialWidth - 1 - overlap, numPanels = Math.ceil(fullWidth / availableMaterial), panelWidth = fullWidth / numPanels * res, error = '';
-colors = new _Colors2['default'](), saveAsTif = new _SaveFiles2['default'](File('G33STORE-1/WIP/' + jobnumber + '/prep_art/' + jobnumber + 'panels.tif'));
+colors = new _Colors2['default'](),
+// saveAsTif = new SaveFiles(File('G33STORE-1/WIP/' + jobnumber + '/prep_art/' + jobnumber + 'panels.tif'));
+saveAsTif = new _SaveFiles2['default'](File('G33STORE-1/WIP/' + jobnumber + '/prep_art/' + jobnumber + 'panels.tif'));
 
+// alert('Panels: ' + numPanels + ' | Width: ' + (panelWidth/res).toFixed(2));
 alert('Panels: ' + numPanels + ' | Width: ' + (panelWidth / res).toFixed(2));
 
 black = colors.solidColor(0, 0, 0, 100);
@@ -498,7 +503,8 @@ try {
     createMarks('Panel Breaks', 100, black, 3, panelWidth);
     saveAsTif.saveTIF();
 } catch (e) {
-    error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' + e.message.toString() + '. ';
+    // error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' + e.message.toString() + '. ';
+    error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' + e.message.toString() + '.';
 
     alert('There was an error...');
 }
