@@ -436,6 +436,7 @@ var Selections = function () {
         key: "selection",
         value: function selection(x, y, width, height) {
             selectedRegion = Array(Array(x, y), Array(x + width, y), Array(x + width, y + height), Array(x, y + height));
+
             return selectedRegion;
         }
     }]);
@@ -466,12 +467,12 @@ var _Logging2 = _interopRequireDefault(_Logging);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-// ./node_modules/.bin/extendscriptr --script src/main.js --output dist/main.dist.js
-
 var doc = app.activeDocument,
     jobnumber = prompt('Job Number: ', '123456P01');
-panelSelection = new _Selections2['default'](), fullWidth = parseInt(doc.width), fullHeight = parseInt(doc.height), res = doc.resolution, overlapWidth = 2 * res, numPanels = Math.ceil(fullWidth / 51), panelWidth = fullWidth / numPanels * res, error = '';
+materialWidth = 54, panelSelection = new _Selections2['default'](), fullWidth = parseInt(doc.width), fullHeight = parseInt(doc.height), res = doc.resolution, overlap = 2, overlapWidth = overlap * res, availableMaterial = materialWidth - 1 - overlap, numPanels = Math.ceil(fullWidth / availableMaterial), panelWidth = fullWidth / numPanels * res, error = '';
 colors = new _Colors2['default'](), saveAsTif = new _SaveFiles2['default'](File('G33STORE-1/WIP/' + jobnumber + '/prep_art/' + jobnumber + 'panels.tif'));
+
+alert('Panels: ' + numPanels + ' | Width: ' + (panelWidth / res).toFixed(2));
 
 black = colors.solidColor(0, 0, 0, 100);
 red = colors.solidColor(0, 100, 100, 0);

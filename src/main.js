@@ -1,5 +1,3 @@
-// ./node_modules/.bin/extendscriptr --script src/main.js --output dist/main.dist.js
-
 import SaveFiles from './SaveFiles';
 import Selections from './Selections';
 import Colors from './Colors';
@@ -7,12 +5,15 @@ import Logging from './Logging';
 
 let doc = app.activeDocument,
     jobnumber = prompt('Job Number: ', '123456P01');
+    materialWidth = 54,
     panelSelection = new Selections,
     fullWidth = parseInt(doc.width),
     fullHeight = parseInt(doc.height),
     res = doc.resolution,
-    overlapWidth = 2 * res,
-    numPanels = Math.ceil(fullWidth / 51),
+    overlap = 2,
+    overlapWidth = overlap * res,
+    availableMaterial = (materialWidth - 1) - overlap,
+    numPanels = Math.ceil(fullWidth / availableMaterial),
     panelWidth = (fullWidth / numPanels) * res,
     error = '';
     colors = new Colors(),
@@ -23,6 +24,8 @@ let doc = app.activeDocument,
                                     'panels.tif'
                                 )
                             );
+
+    alert('Panels: ' + numPanels + ' | Width: ' + (panelWidth/res).toFixed(2));
 
     black = colors.solidColor(0, 0, 0, 100);
     red = colors.solidColor(0, 100, 100, 0);
@@ -48,7 +51,9 @@ try {
     createMarks('Panel Breaks', 100, black, 3, panelWidth);
     saveAsTif.saveTIF();
 } catch(e) {
-    error += 'Line: ' + e.line.toString() + ', ' + e.name.toString() + ', ' +
+    error += 'Line: ' +
+              e.line.toString() + ', ' +
+              e.name.toString() + ', ' +
               e.message.toString() + '. ';
 
     alert('There was an error...');
