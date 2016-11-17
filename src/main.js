@@ -4,7 +4,7 @@ import Colors from './Colors';
 import Logging from './Logging';
 
 let doc = app.activeDocument,
-    jobnumber = prompt('Job Number: ', '123456P01');
+    jobnumber = prompt('Job Number: ', '123456P01'),
     materialWidth = 54,
     panelSelection = new Selections,
     fullWidth = parseInt(doc.width),
